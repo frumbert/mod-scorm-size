@@ -5,7 +5,7 @@ The SCORM player in Moodle 2.7+ is a horror for embedded content. Why embed rath
 
 But you can use a customscript to replace the scorm viewer with one better. Why a custom script? It's easier to update, and it's not touching core code.
 
-<blockquote class="imgur-embed-pub" lang="en" data-id="a/d0tTU"><a href="//imgur.com/a/d0tTU">Moodle Scorm Layout Problems</a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
+<iframe class="imgur-album" width="100%" height="550" frameborder="0" src="//imgur.com/a/d0tTU/embed?background=f2f2f2&text=1a1a1a&link=4e76c9"></iframe>
 
 Installation
 ------------
