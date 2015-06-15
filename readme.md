@@ -18,6 +18,10 @@ Options
 -------
 You can set the size of the embedded window, but there's a trick to it. You have to change the package options to 'Open in new window', which gives you control over the size. Put in the size you want the embedded content to be, noting that if the values are <= 100, they are considered to be percentages, and >100 are considered to be pixels (this is the default behaviour). Save the settings, and then edit the settings again. Change the open method from popup back to embedded. The size will be greyed out (but remembered), and applied to your embedded scorm package.
 
+Versions
+--------
+This trick can be made to work with most Moodle versions, since the player.php code changes significantly between releases. Check the individual branches to make sure you download the version correct for you.
+
 License
 -------
 GPL3
