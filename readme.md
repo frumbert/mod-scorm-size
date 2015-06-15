@@ -16,7 +16,7 @@ Installation
 
 Options
 -------
-You can set the size of the embedded window, but there's a trick to it. You have to change the package options to 'Open in new window', which gives you control over the size. Put in the size you want the embedded content to be, noting that if the values are <= 100, they are considered to be percentages, and >100 are considered to be pixels (this is the default behaviour). Save the settings, and then edit the settings again. Change the open method from popup back to embedded. The size will be greyed out (but remembered), and applied to your embedded scorm package.
+You can set the size of the embedded window, but there's a trick to it. You have to change the package options to 'Open in new window', which gives you control over the size. Put in the size you want the embedded content to be, noting that if the values are <= 100, they are considered to be percentages, and >100 are considered to be pixels, and that the height can't be lower than 600px (yes this is confusing: this is the unchanged default behaviour). Save the settings, and then edit the settings again. Change the open method from popup back to embedded. The size will be greyed out (but remembered), and applied to your embedded scorm package.
 
 Versions
 --------
