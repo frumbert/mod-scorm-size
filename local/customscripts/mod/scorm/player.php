@@ -169,7 +169,8 @@ $PAGE->requires->data_for_js('scormplayerdata', Array('launch' => false,
                                                        'courseid' => $scorm->course,
                                                        'cwidth' => $scorm->width,
                                                        'cheight' => $scorm->height,
-                                                       'popupoptions' => $scorm->options), true);
+                                                       'popupoptions' => $scorm->options,
+                                                       'popup' => $scorm->popup), true);
 $PAGE->requires->js('/mod/scorm/request.js', true);
 $PAGE->requires->js('/lib/cookies.js', true);
 
@@ -246,7 +247,6 @@ echo html_writer::end_div(); // Scorm page ends.
 
 $scoes = scorm_get_toc_object($USER, $scorm, $currentorg, $sco->id, $mode, $attempt);
 $adlnav = scorm_get_adlnav_json($scoes['scoes']);
-$options = "{\"width\":".$scorm->width.",\"height\":".$scorm->height.",\"popup\":".$scorm->popup."}";
 
 if (empty($scorm->popup) || $displaymode == 'popup') {
     if (!isset($result->toctitle)) {
@@ -259,7 +259,7 @@ if (empty($scorm->popup) || $displaymode == 'popup') {
     );
     $scorm->nav = intval($scorm->nav);
     $PAGE->requires->js_init_call('M.mod_scorm.init', array($scorm->nav, $scorm->navpositionleft, $scorm->navpositiontop, $scorm->hidetoc,
-                                                            $collapsetocwinsize, $result->toctitle, $name, $sco->id, $adlnav, $options), false, $jsmodule);
+                                                            $collapsetocwinsize, $result->toctitle, $name, $sco->id, $adlnav), false, $jsmodule);
 }
 if (!empty($forcejs)) {
     echo $OUTPUT->box(get_string("forcejavascriptmessage", "scorm"), "generalbox boxaligncenter forcejavascriptmessage");
@@ -280,3 +280,4 @@ echo $OUTPUT->footer();
 
 // Set the start time of this SCO.
 scorm_insert_track($USER->id, $scorm->id, $scoid, $attempt, 'x.start.time', time());
+die();
