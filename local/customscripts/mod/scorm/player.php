@@ -79,6 +79,9 @@ if ($currentorg !== '') {
 if ($newattempt !== 'off') {
     $url->param('newattempt', $newattempt);
 }
+if ($displaymode !== '') {
+    $url->param('display', $displaymode);
+}
 $PAGE->set_url($url);
 $forcejs = get_config('scorm', 'forcejavascript');
 if (!empty($forcejs)) {
@@ -157,8 +160,14 @@ $completion->set_module_viewed($cm);
 
 // Print the page header.
 if (empty($scorm->popup) || $displaymode == 'popup') {
-    // Redirect back to the correct section if one section per page is being used.
-    $exiturl = course_get_url($course, $cm->sectionnum);
+    if ($course->format == 'singleactivity' && $scorm->skipview == SCORM_SKIPVIEW_ALWAYS
+        && !has_capability('mod/scorm:viewreport', context_module::instance($cm->id))) {
+        // Redirect students back to site home to avoid redirect loop.
+        $exiturl = $CFG->wwwroot;
+    } else {
+        // Redirect back to the correct section if one section per page is being used.
+        $exiturl = course_get_url($course, $cm->sectionnum);
+    }
 
     $exitlink = html_writer::link($exiturl, $strexit, array('title' => $strexit));
     $PAGE->set_button($exitlink);
@@ -264,7 +273,8 @@ if (empty($scorm->popup) || $displaymode == 'popup') {
                             $scorm->hidetoc, $collapsetocwinsize, $result->toctitle, $name, $sco->id, $adlnav, $options), false, $jsmodule);
 }
 if (!empty($forcejs)) {
-    echo $OUTPUT->box(get_string("forcejavascriptmessage", "scorm"), "generalbox boxaligncenter forcejavascriptmessage");
+    $message = $OUTPUT->box(get_string("forcejavascriptmessage", "scorm"), "generalbox boxaligncenter forcejavascriptmessage");
+    echo html_writer::tag('noscript', $message);
 }
 
 if (file_exists($CFG->dirroot.'/mod/scorm/datamodels/'.$scorm->version.'.php')) {
@@ -282,3 +292,6 @@ echo $OUTPUT->footer();
 
 // Set the start time of this SCO.
 scorm_insert_track($USER->id, $scorm->id, $scoid, $attempt, 'x.start.time', time());
+
+exit;
+
